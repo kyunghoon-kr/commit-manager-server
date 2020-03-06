@@ -1,12 +1,11 @@
 const express = require('express');
 const api = require('./api')
-
 const router = express.Router();
-router.get(async (req, res) => {
+router.get('/result', async (req, res) => {
     console.log('/result 처리 라우팅')
     
-    const paramId = req.body.id || req.query.id;
-    const paramToken = req.body.token || req.query.token;
+    const paramId = req.query.id;
+    const paramToken = req.query.token;
     const data = await api.fetchEvents(paramId, paramToken);
     res.writeHead('200', {'Content-Type': 'text/html; charset=utf-8;'});
     res.write('<h1>익스프레스 서버에서 결과를 응답하였습니다.</h1>');
@@ -18,7 +17,7 @@ router.get(async (req, res) => {
 });
 // 미들웨어에서 파라미터 확인
 
-export default router;
+module.exports = router;
 
 
 
