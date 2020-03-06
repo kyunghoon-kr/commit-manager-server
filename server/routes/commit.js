@@ -1,7 +1,7 @@
 const express = require('express');
 const api = require('./api')
 const router = express.Router();
-router.get('/result', async (req, res) => {
+router.get('/commit', async (req, res) => {
     console.log('/result 처리 라우팅')
     
     const paramId = req.query.id;
