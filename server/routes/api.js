@@ -14,4 +14,16 @@ const fetchEvents = async (username, token) => {
     }
 };
 
+const fetchUserInfo = async (username) => {
+    // 토큰을 헤더에 달기
+    console.log('fetchUserInfo 함수 호출');
+    try {
+        const response = await axios.get(`https://api.github.com/users/${username}`);
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
+};
+
 exports.fetchEvents = fetchEvents;
+exports.fetchUserInfo = fetchUserInfo;
