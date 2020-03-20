@@ -5,8 +5,7 @@ router.get('/username', async (req, res) => {
     console.log('/username 처리 라우팅')
     
     const paramId = req.query.id;
-    const paramToken = req.query.token;
-    const data = await api.fetchUserInfo(paramId, paramToken);
+    const data = await api.fetchUserInfo(paramId);
     res.send(data.name);
 });
 // 미들웨어에서 파라미터 확인

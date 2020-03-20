@@ -4,9 +4,9 @@ const usernameRouter = require('./routes/username');
 const userRouter = require('./routes/user');
 const app = express();
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 
-app.use(express.static('public'));
+// app.use(express.static('public'));
 app.use('/', commitRouter);
 app.use('/', usernameRouter);
 app.use('/', userRouter);
