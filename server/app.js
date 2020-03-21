@@ -2,11 +2,14 @@ const express = require('express');
 const commitRouter = require('./routes/commit');
 const usernameRouter = require('./routes/username');
 const userRouter = require('./routes/user');
+const cors = require('cors');
+
 const app = express();
 
 app.set('port', process.env.PORT || 3001);
 
-// app.use(express.static('public'));
+app.use(cors());
+
 app.use('/', commitRouter);
 app.use('/', usernameRouter);
 app.use('/', userRouter);
