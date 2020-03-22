@@ -7,8 +7,8 @@ router.get('/username', async (req, res) => {
     const data = await api.fetchUserInfo(paramId);
     try {
         if(data.name)
-            res.send(data.name);
-    } catch { res.send('username not found'); }
+            res.json({ name: data.name });
+    } catch { res.json({ error: "username not found" }); }
 });
 
 module.exports = router;

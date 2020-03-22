@@ -7,9 +7,9 @@ router.get('/user', async (req, res) => {
     const data = await api.fetchUserInfo(paramId);
     try {
         if(data.name) {
-            res.send(true);
+            res.json( {isExist : true} )
         }
-    } catch { res.send(false); }
+    } catch { res.json( {isExist : false} ); }
 });
 
 module.exports = router;

@@ -21,7 +21,7 @@ const fetchUserInfo = async (username) => {
         const response = await axios.get(`https://api.github.com/users/${username}`);
         return response.data;
     } catch (e) {
-        console.log(e);
+        console.log("유효하지 않는 사용자를 참조하였습니다");
     }
 };
 
