@@ -24,5 +24,11 @@ const fetchUserInfo = async (username) => {
     }
 };
 
+const getDate = () => {
+    let today = new Date();
+    return `${today.getFullYear()}-0${today.getMonth()+1}-${today.getDate()}`
+}
+
 exports.fetchEvents = fetchEvents;
 exports.fetchUserInfo = fetchUserInfo;
+exports.getDate = getDate;
