@@ -6,7 +6,7 @@ router.get('/user', async (req, res) => {
     const paramId = req.query.id;
     const data = await api.fetchUserInfo(paramId);
     try {
-        if(data.name) {
+        if(data.login) {
             res.json( {isExist : true} )
         }
     } catch { res.json( {isExist : false} ); }
