@@ -8,7 +8,7 @@ router.get('/username', async (req, res) => {
     try {
         if(data.name!=null) { res.json({ name: data.name } )}
         else { res.json( { error: "username not found" })}
-    } catch { res.json({ error: "unknown error" }); }
+    } catch { res.json({ error: "unknown user" }); }
 });
 
 module.exports = router;
