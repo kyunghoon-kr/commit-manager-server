@@ -27,11 +27,14 @@ express : `4.17.1`
       - count: 오늘의 커밋 횟수
       - lastCommit: 마지막 커밋 시간
       
-2. /username
+2. /userinfo
     - Params:
       - id: Github user id
     - Response:
       - name: Github user 이름
+      - imgSrc: 프로필 사진 이미지 링크
+      - follower: 팔로워 수
+      - following: 팔로잉 수
       
 3. /user
     - Params:
