@@ -10,7 +10,7 @@ router.get('/commit', async (req, res) => {
     const date = api.getDate();
     let count = 0;
     data.map((_data) => 
-        _data.created_at.includes("2020-03-27") ? count += 1 : _data
+        _data.created_at.includes(date) ? count += 1 : _data
     );
     const resData = {
         count: count,
