@@ -8,13 +8,13 @@ router.get('/commit', async (req, res) => {
     const paramToken = req.query.token;
     const data = await api.fetchEvents(paramId, paramToken);
     const date = api.getDate();
+    console.log(date);
     let count = 0;
     data.map((_data) => 
         _data.created_at.includes(date) ? count += 1 : _data
     );
     const resData = {
         count: count,
-        isCommitted: `${count!==0}`,
         lastCommit: data[0].created_at
     };
     res.json(resData);
