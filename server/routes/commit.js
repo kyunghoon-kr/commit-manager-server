@@ -14,7 +14,7 @@ router.get('/commit', async (req, res) => {
     );
     const resData = {
         count: count,
-        isCommited: `${count!==0}`,
+        isCommitted: `${count!==0}`,
         lastCommit: data[0].created_at
     };
     res.json(resData);
