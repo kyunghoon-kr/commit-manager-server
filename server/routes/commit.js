@@ -7,15 +7,17 @@ router.get('/commit', async (req, res) => {
     const paramId = req.query.id;
     const paramToken = req.query.token;
     const data = await api.fetchEvents(paramId, paramToken);
-    const date = api.getDate();
+    const date = api.getDate(new Date());
     console.log(date);
+    let dateFormat = new Date(data[0].created_at);
     let count = 0;
     data.map((_data) => 
         _data.created_at.includes(date) ? count += 1 : _data
     );
+
     const resData = {
         count: count,
-        lastCommit: data[0].created_at
+        lastCommit: `${api.getDate(dateFormat).replace(/-/gi, '')}${dateFormat.getHours()}${dateFormat.getMinutes()}`
     };
     res.json(resData);
 });
