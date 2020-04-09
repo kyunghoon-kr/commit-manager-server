@@ -3,6 +3,7 @@ const commitRouter = require('./routes/commit');
 const userinfoRouter = require('./routes/userinfo');
 const userRouter = require('./routes/user');
 const userEventRouter = require('./routes/userevent');
+const loginRouter = require('./routes/login');
 const cors = require('cors');
 
 const app = express();
@@ -15,6 +16,7 @@ app.use('/', commitRouter);
 app.use('/', userinfoRouter);
 app.use('/', userRouter);
 app.use('/', userEventRouter);
+app.use('/', loginRouter);
 app.listen(app.get('port'), () => { 
     console.log('익스프레스 서버를 시작합니다, Port : ' + app.get('port'));
 });
