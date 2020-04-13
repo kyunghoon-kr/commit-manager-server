@@ -6,23 +6,25 @@ const qs = require('querystring');
 const axios = require('axios');
 
 let state; // 보안 절차를 위한 랜덤 코드
+let serverUrl = "http://localhost:3001"; // 서버 url
 
 router.get('/login', async (req, res) => {
-    console.log('/githublogin 처리 라우팅 - Github Login');
+    console.log('/login 처리 라우팅 - Github Login');
     state = rs.generate();
     const url = 'https://github.com/login/oauth/authorize?';
     const query = qs.stringify({
         client_id: "eaa4fc3429075f2b09ab", // OAuth application client id
-        redirect_uri: "http://localhost:3000/index", // 인증을 끝내고 리다이렉트 될 url
+        redirect_uri: serverUrl + "/token", // 인증을 끝내고 리다이렉트 될 url
         state: state,
         scope: 'user:email',
     });
     const githubAuthUrl = url + query;
-    res.send(githubAuthUrl)
+    res.redirect(githubAuthUrl);
 });
 
 router.get('/token', async (req, res) => {
     console.log('/token 처리 라우팅 - 인증 유효성 검사');
+
     const returncode = req.query.code;
     const returnstate = req.query.state;
     console.log(returnstate, returncode);
@@ -34,7 +36,7 @@ router.get('/token', async (req, res) => {
         client_id: "eaa4fc3429075f2b09ab",
         client_secret: "8f631fa325d807b17f7f30522b162ccbe33f9e44",
         code: returncode,
-        redirect_uri: "http://localhost:3000/index",
+        redirect_uri: serverUrl + "/token",
         state: state,
     })
     const authurl = host + queryString;
@@ -42,7 +44,7 @@ router.get('/token', async (req, res) => {
     .then(function(resp) {
         const token = qs.parse(resp.data).access_token;
         console.log(token);
-        res.send(token)
+        res.redirect(serverUrl + "/githubuser?token=" + token)
     })
     .catch(function(err) {
         console.log(err);
@@ -59,7 +61,10 @@ router.get('/githubuser', function(req, res) {
     }
     axios.get('https://api.github.com/user/public_emails', config)
     .then(function(resp) {
-        res.send(resp.data[0].email);
+        res.json({
+            email: resp.data[0].email,
+            token: req.query.token
+        })
     })
     .catch(function(err) {
         console.log(err)
