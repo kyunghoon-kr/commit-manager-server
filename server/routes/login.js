@@ -6,7 +6,7 @@ const qs = require('querystring');
 const axios = require('axios');
 
 let state; // 보안 절차를 위한 랜덤 코드
-let serverUrl = "http://localhost:3001"; // 서버 url
+let serverUrl = "http://ec2-18-223-112-230.us-east-2.compute.amazonaws.com:3001"; // 서버 url
 
 router.get('/login', async (req, res) => {
     console.log('/login 처리 라우팅 - Github Login');
