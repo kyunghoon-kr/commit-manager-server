@@ -143,4 +143,6 @@ dist/
 tmp/
 temp/
 
+# 데이터 보안화를 위한 ignore
+appdata.js
 # End of https://www.gitignore.io/api/node,code,macos
