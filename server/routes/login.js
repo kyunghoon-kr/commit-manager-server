@@ -6,7 +6,8 @@ const qs = require('querystring');
 const axios = require('axios');
 
 let state; // 보안 절차를 위한 랜덤 코드
-let serverUrl = "http://ec2-18-223-112-230.us-east-2.compute.amazonaws.com:3001"; // 서버 url
+// let serverUrl = "http://ec2-18-223-112-230.us-east-2.compute.amazonaws.com:3001"; // 서버 url
+let serverUrl = "http://localhost:3001"; // 로컬 테스트용 서버 url
 
 router.get('/login', async (req, res) => {
     console.log('/login 처리 라우팅 - Github Login');
@@ -29,6 +30,7 @@ router.get('/token', async (req, res) => {
     const returnstate = req.query.state;
     console.log(returnstate, returncode);
     if(state !== returnstate) {
+        console.log(state + "\n" + returnstate);
         res.send(false); // 보안 통과 못한 경우
     }
     const host = 'https://github.com/login/oauth/access_token?'
@@ -52,19 +54,22 @@ router.get('/token', async (req, res) => {
 });
 
 router.get('/githubuser', function(req, res) {
+    console.log('/githubuser 처리 라우팅 - 유저 정보 얻어오기');
     console.log(req.query.token);
+    
     const config = {
         headers: {
             Authorization: 'token ' + req.query.token,
             'User-Agent': 'Login-App'
         }
     }
-    axios.get('https://api.github.com/user/public_emails', config)
+    axios.get('https://api.github.com/user', config)
     .then(function(resp) {
-        res.json({
-            email: resp.data[0].email,
-            token: req.query.token
-        })
+        // res.json({
+        //     id: resp.data.login,
+        //     token: req.query.token
+        // });
+        res.redirect(serverUrl + `?token=${req.query.token}&id=${resp.data.login}`);
     })
     .catch(function(err) {
         console.log(err)
