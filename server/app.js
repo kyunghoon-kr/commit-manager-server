@@ -9,7 +9,7 @@ const cors = require('cors');
 const app = express();
 
 app.set('port', process.env.PORT || 3001);
-
+app.use(express.static('public'));
 app.use(cors());
 
 app.use('/', commitRouter);

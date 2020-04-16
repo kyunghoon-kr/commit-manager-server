@@ -1,6 +1,7 @@
 const express = require('express');
 const { getAppData } = require('../appdata')
 const router = express.Router();
+const fs = require('fs');
 const rs = require('randomstring');
 const qs = require('querystring');
 const axios = require('axios');
@@ -64,18 +65,29 @@ router.get('/githubuser', (req, res) => {
             'User-Agent': 'Login-App'
         }
     }
+
+    // res.redirect(SERVER_URL + '/loginhtml');
+
     axios.get('https://api.github.com/user', config)
     .then((resp) => {
         // res.json({
         //     id: resp.data.login,
         //     token: req.query.token
         // });
-        res.redirect(SERVER_URL + `?token=${req.query.token}&id=${resp.data.login}`);
+        res.redirect(SERVER_URL + `/result?token=${req.query.token}&id=${resp.data.login}`);
     })
     .catch((err) => {
         console.log(err)
     })
 });
+
+router.get('/result', (req, res) => {
+    console.log('/githubuser 처리 라우팅 - 유저 정보 얻어오기');
+    const paramToken = req.query.token;
+    const paramId = req.query.id;
+    res.redirect(SERVER_URL + "/login.html");
+    res.end();
+}); 
 
 module.exports = router;
 
