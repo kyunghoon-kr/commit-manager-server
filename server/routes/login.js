@@ -30,9 +30,9 @@ router.get('/token', async (req, res) => {
 
     const returncode = req.query.code;
     const returnstate = req.query.state;
-    console.log(returnstate, returncode);
+    // console.log(returnstate, returncode);
     if(state !== returnstate) {
-        console.log(state + "\n" + returnstate);
+        console.log(state + "\n" + returnstate+ "불일치");
         res.send(false); // 보안 통과 못한 경우
     }
     const host = 'https://github.com/login/oauth/access_token?'
@@ -47,7 +47,6 @@ router.get('/token', async (req, res) => {
     axios.get(authurl)
     .then((resp) => {
         const token = qs.parse(resp.data).access_token;
-        console.log(token);
         res.redirect(SERVER_URL + "/githubuser?token=" + token)
     })
     .catch((err) => {
@@ -57,7 +56,6 @@ router.get('/token', async (req, res) => {
 
 router.get('/githubuser', (req, res) => {
     console.log('/githubuser 처리 라우팅 - 유저 정보 얻어오기');
-    console.log(req.query.token);
     
     const config = {
         headers: {
@@ -82,10 +80,11 @@ router.get('/githubuser', (req, res) => {
 });
 
 router.get('/result', (req, res) => {
-    console.log('/githubuser 처리 라우팅 - 유저 정보 얻어오기');
+    console.log('/result 처리 라우팅 - 유저 정보 얻어오기');
     const paramToken = req.query.token;
     const paramId = req.query.id;
     res.redirect(SERVER_URL + "/login.html");
+    console.log(`Token : ${paramToken}\nId: ${paramId}`);
     res.end();
 }); 
 
