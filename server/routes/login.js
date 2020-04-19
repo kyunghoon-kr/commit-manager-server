@@ -10,7 +10,7 @@ let state; // 보안 절차를 위한 랜덤 코드
 
 // 데이터 끌어다 사용하기
 const {CLIENT_ID, CLIENT_SECRET, SERVER_URL} = getAppData();
-console.log(CLIENT_ID, CLIENT_SECRET, SERVER_URL);
+// console.log(CLIENT_ID, CLIENT_SECRET, SERVER_URL);
 router.get('/login', async (req, res) => {
     console.log('/login 처리 라우팅 - Github Login');
     state = rs.generate();
