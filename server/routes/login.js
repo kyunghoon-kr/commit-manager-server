@@ -83,7 +83,7 @@ router.get('/result', (req, res) => {
     console.log('/result 처리 라우팅 - 유저 정보 얻어오기');
     const paramToken = req.query.token;
     const paramId = req.query.id;
-    res.redirect(SERVER_URL + "/login.html");
+    res.redirect(SERVER_URL + `/login.html?token=${paramToken}&id=${paramId}`);
     console.log(`Token : ${paramToken}\nId: ${paramId}`);
     res.end();
 }); 
