@@ -18,8 +18,9 @@
         }
 
         const parameter = get_query();
+        console.dir(parameter);
         window.onload = () => {
-            window.Android.getUserId(parameter.id);
+            window.Android.getUserId(parameter.id, parameter.token);
         };
     </script> 
     Github login test 끝
