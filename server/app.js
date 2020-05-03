@@ -1,7 +1,6 @@
 const express = require('express');
 const commitRouter = require('./routes/commit');
 const userinfoRouter = require('./routes/userinfo');
-const userRouter = require('./routes/user');
 const userEventRouter = require('./routes/userevent');
 const loginRouter = require('./routes/login');
 const cors = require('cors');
@@ -14,7 +13,6 @@ app.use(cors());
 
 app.use('/', commitRouter);
 app.use('/', userinfoRouter);
-app.use('/', userRouter);
 app.use('/', userEventRouter);
 app.use('/', loginRouter);
 app.listen(app.get('port'), () => { 
