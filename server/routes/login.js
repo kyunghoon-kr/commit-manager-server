@@ -19,7 +19,7 @@ router.get('/login', async (req, res) => {
         client_id: CLIENT_ID, // OAuth application client id
         redirect_uri: SERVER_URL + "/token", // 인증을 끝내고 리다이렉트 될 url
         state: state,
-        scope: 'user:email',
+        scope: 'repo',
     });
     const githubAuthUrl = url + query;
     res.redirect(githubAuthUrl);
