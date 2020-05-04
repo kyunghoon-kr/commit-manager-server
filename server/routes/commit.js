@@ -14,17 +14,16 @@ router.get('/commit', async (req, res) => {
     data.map((_data) =>  // 오늘 날짜의 PushEvent들만 걸러낸다.
         _data.created_at.includes(date) && _data.type == "PushEvent" ? todayEvent.push(_data) : _data
     );
-
+    
     if(todayEvent.length) {
         const resData = {
-            count: todayEvent.length,
+            count: `${todayEvent.length >= 9 ? '9+' : todayEvent.length}`,
             lastCommit: `${api.getDate(dateFormat).replace(/-/gi, '')}${dateFormat.getHours()+9}${dateFormat.getMinutes()}`, // 표준 세계시 고려하여 포맷
             repository: todayEvent[0].repo.name,
             msg: todayEvent[0].payload.commits[0].message
         };
         res.json(resData);
     }
-    
     else {
         res.json({
             count: 0
