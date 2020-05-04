@@ -8,21 +8,31 @@ router.get('/commit', async (req, res) => {
     const paramToken = req.query.token;
     const data = await api.fetchEvents(paramId, paramToken);
     const date = api.getDate(new Date());
+    const todayEvent = [];
     let dateFormat = new Date(data[0].created_at);
-    let count = 0;
-    data.map((_data) => 
-        _data.created_at.includes(date) ? count += 1 : _data
+
+    data.map((_data) =>  // 오늘 날짜의 PushEvent들만 걸러낸다.
+        _data.created_at.includes(date) && _data.type == "PushEvent" ? todayEvent.push(_data) : _data
     );
 
-    const resData = {
-        count: count,
-        lastCommit: `${api.getDate(dateFormat).replace(/-/gi, '')}${dateFormat.getHours()+9}${dateFormat.getMinutes()}`, // 표준 세계시 고려하여 포맷
-        repository: data[0].repo.name,
-        // msg: data[0].payload.commits[0].message
-    };
-    res.json(resData);
+    if(todayEvent.length) {
+        const resData = {
+            count: todayEvent.length,
+            lastCommit: `${api.getDate(dateFormat).replace(/-/gi, '')}${dateFormat.getHours()+9}${dateFormat.getMinutes()}`, // 표준 세계시 고려하여 포맷
+            repository: todayEvent[0].repo.name,
+            msg: todayEvent[0].payload.commits[0].message
+        };
+        res.json(resData);
+    }
+    
+    else {
+        res.json({
+            count: 0
+        })
+    }
+    
+    
 });
-// 미들웨어에서 파라미터 확인
 
 module.exports = router;
 
