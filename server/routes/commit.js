@@ -10,6 +10,7 @@ router.get('/commit', async (req, res) => {
     const date = api.getDate(new Date());
     console.log(date);
     let dateFormat = new Date(data[0].created_at);
+    console.log(dateFormat);
     let count = 0;
     data.map((_data) => 
         _data.created_at.includes(date) ? count += 1 : _data
