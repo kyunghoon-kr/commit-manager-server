@@ -17,7 +17,8 @@ router.get('/commit', async (req, res) => {
 
     const resData = {
         count: count,
-        lastCommit: `${api.getDate(dateFormat).replace(/-/gi, '')}${dateFormat.getHours()}${dateFormat.getMinutes()}`
+        lastCommit: `${api.getDate(dateFormat).replace(/-/gi, '')}${dateFormat.getHours()}${dateFormat.getMinutes()}`, // 표준 세계시 고려하여 포맷
+
     };
     res.json(resData);
 });
