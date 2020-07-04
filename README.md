@@ -17,29 +17,6 @@ express : `4.17.1`
 [GitHub API v3]("https://developer.github.com/v3/")
 
 ### :satellite: Uri
-1. /commit
-    - Params: 
-      - token: Github private repository에 접근을 위한 Token을 입력(선택)
-      - id: Github user id
-    
-    - Response : 
-      - isCommited: 오늘의 커밋 여부 검사
-      - count: 오늘의 커밋 횟수
-      - lastCommit: 마지막 커밋 시간
-      
-2. /userinfo
-    - Params:
-      - id: Github user id
-    - Response:
-      - name: Github user 이름
-      - imgSrc: 프로필 사진 이미지 링크
-      - follower: 팔로워 수
-      - following: 팔로잉 수
-      
-3. /user
-    - Params:
-      - id: Github user id
-    - Response:
-      - isExist: 해당 id의 유저 존재 여부 검사
+
   
 
